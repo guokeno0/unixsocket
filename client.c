@@ -49,10 +49,10 @@ int main(int argc, char *argv[]) {
     exit(-1);
   }
 
-  setNonblocking(fd);
+  //setNonblocking(fd);
 
   while(1) {
-    if ((rc = read(fd, buf, sizeof(buf))) != sizeof(buf)) {
+    if ((rc = recv(fd, buf, sizeof(buf), MSG_DONTWAIT)) != sizeof(buf)) {
       if (rc > 0) fprintf(stderr,"partial read %d\n", rc);
       else {
         int lasterrno = errno;
